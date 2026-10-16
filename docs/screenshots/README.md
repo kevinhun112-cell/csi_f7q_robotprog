@@ -1,11 +1,10 @@
-# Futasi kepernyokepek
+# Futási képernyőképek
 
-Ez a mappa a ROS 2 beadando tenyleges futasi bizonyitekainak helye.
+Ez a mappa a ROS 2 Humble beadandó futás közben készített képernyőképeit tartalmazza.
 
-A kovetkezo kepeket kell ide feltolteni:
-- `01-simulation-and-safety-response.jpg` — a futasi naplo es a sebessegkorlatozas.
-- `02-ros2-nodes-and-topics.jpg` — a ket ROS 2 node es a topiclista.
-- `03-safe-velocity-topic.jpg` — a `/robot/safe_cmd_vel` topic adatai.
-- `04-safety-status-transitions.jpg` — `CLEAR`, `SLOW` es `STOP` allapotvaltasok.
+- [01 – Szimuláció és biztonsági reakció](01-simulation-and-safety-response.jpg): a napló és a sebességkorlátozás.
+- [02 – ROS 2 node-ok és topicok](02-ros2-nodes-and-topics.jpg): az aktív node-ok és a topiclista.
+- [03 – Biztonságos sebességparancs](03-safe-velocity-topic.jpg): a `/robot/safe_cmd_vel` topic kimenete.
+- [04 – Biztonsági állapotváltások](04-safety-status-transitions.jpg): a `CLEAR`, `SLOW` és `STOP` állapotok.
 
-A kepek a repository GitHub-feluletén a **Add file → Upload files** menuponttal tolthetok fel ebbe a mappaba.
+A képek összefoglalója a repository fő [README.md](../../README.md) fájljában is megjelenik.
