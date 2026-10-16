@@ -1,4 +1,4 @@
-name: ROS 2 Humble build
+name: ROS 2 Humble build and runtime smoke test
 
 on:
   push:
@@ -22,3 +22,20 @@ jobs:
           source /opt/ros/humble/setup.bash
           cd ros2_ws
           colcon build --packages-select robot_biztonsag --symlink-install
+      - name: Check launch and safety state transitions
+        shell: bash
+        run: |
+          source /opt/ros/humble/setup.bash
+          source ros2_ws/install/setup.bash
+          set +e
+          timeout 24s ros2 launch robot_biztonsag robot_safety.launch.py > /tmp/robot-safety.log 2>&1
+          result=$?
+          set -e
+          cat /tmp/robot-safety.log
+          if [ "$result" -ne 124 ] && [ "$result" -ne 0 ]; then
+            echo "Launch failed with exit code $result"
+            exit "$result"
+          fi
+          grep -q "CLEAR:" /tmp/robot-safety.log
+          grep -q "SLOW:" /tmp/robot-safety.log
+          grep -q "STOP:" /tmp/robot-safety.log
