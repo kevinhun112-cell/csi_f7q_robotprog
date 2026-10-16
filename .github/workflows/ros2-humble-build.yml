@@ -1,0 +1,24 @@
+name: ROS 2 Humble build
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  humble-build:
+    runs-on: ubuntu-22.04
+    container: ros:humble-ros-base
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: ros2_ws/src/csi_f7q_robotprog
+      - name: Install colcon
+        run: |
+          apt-get update
+          apt-get install -y python3-colcon-common-extensions
+      - name: Build package
+        shell: bash
+        run: |
+          source /opt/ros/humble/setup.bash
+          cd ros2_ws
+          colcon build --packages-select robot_biztonsag --symlink-install
