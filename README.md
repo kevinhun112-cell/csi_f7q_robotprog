@@ -38,6 +38,34 @@ flowchart LR
 
 A forrásdiagram: `docs/node_topic_diagram.mmd`.
 
+## Futási képernyőképek
+
+Az alábbi képernyőképek a ROS 2 Humble környezetben futtatott szimulációból származnak.
+
+### 1. A szimuláció és a biztonsági reakció
+
+A futási napló szemlélteti, hogy a vezérlő a mért akadálytávolság alapján `CLEAR`, `SLOW` és `STOP` állapotokat ad ki. Megálláskor a biztonságos előremeneti sebesség 0,00 m/s.
+
+![Szimulációs napló és biztonsági reakció](docs/screenshots/01-simulation-and-safety-response.jpg)
+
+### 2. ROS 2 node-ok és topicok
+
+A két aktív node és a köztük használt topicok listája.
+
+![ROS 2 node- és topiclista](docs/screenshots/02-ros2-nodes-and-topics.jpg)
+
+### 3. Biztonságos sebességparancs
+
+A `/robot/safe_cmd_vel` topic által publikált `geometry_msgs/msg/Twist` üzenet.
+
+![Biztonságos sebesség topic kimenete](docs/screenshots/03-safe-velocity-topic.jpg)
+
+### 4. Biztonsági állapotváltások
+
+A `/robot/safety_status` topicból származó üzenetek, amelyek mutatják a `CLEAR`, `SLOW` és `STOP` állapotokat, valamint a kívánt és engedélyezett sebességet.
+
+![Biztonsági állapotváltások](docs/screenshots/04-safety-status-transitions.jpg)
+
 ## Követelmények
 
 - Ubuntu 22.04 és ROS 2 Humble
@@ -96,15 +124,16 @@ A sebességszámítás leválasztott, ezért egyszerű egységtesztek futtathat�
 python3 -m unittest discover -s test -v
 ```
 
-## Beadás előtti ellenőrzőlista
+## Ellenőrzés
 
-- [ ] `colcon build --packages-select robot_biztonsag --symlink-install` sikeres ROS 2 Humble környezetben.
-- [ ] A launch fájl mindkét node-ot elindítja.
-- [ ] A `CLEAR`, `SLOW` és `STOP` állapot legalább egyszer megjelenik a szimuláció futása közben.
-- [ ] Készül képernyőkép a futó programról és a topic kimenetéről.
-- [ ] A GitHub repository neve megfelel az oktatói névkonvenciónak: `vvv_nnn_opcionalis`, kisbetűkkel.
-- [ ] A README parancsait tiszta terminálból is ellenőrzöd.
+A GitHub Actions munkafolyamatok a következő ellenőrzéseket végzik:
 
-## Korlátok és ellenőrzési állapot
+- Python-egységtesztek a sebességkorlátozó logikára.
+- ROS 2 Humble build a csomagra.
+- Indítási smoke test: mindkét node elindul, és a naplóban megjelenik a `CLEAR`, `SLOW` és `STOP` állapot.
 
-A Python-szintaxis, a csomag XML-metaadata és a ROS-tól független biztonsági logika egységtesztjei automatizáltan ellenőrizhetők. A tényleges ROS 2 build/futtatás csak ROS 2 Humble környezetben igazolható. A repository nem tartalmaz kitalált futási képernyőképet vagy nem igazolt builderedményt.
+A munkafolyamatok eredményei a repository **Actions** lapján tekinthetők meg.
+
+## Korlátok
+
+A projekt oktatási célú, szimulált példa; valódi robot biztonságkritikus vezérlésére önmagában nem alkalmas.
