@@ -1,0 +1,5 @@
+flowchart LR
+    S[motion_simulator] -->|/robot/front_range<br/>sensor_msgs/msg/Range| C[safety_controller]
+    S -->|/robot/desired_cmd_vel<br/>geometry_msgs/msg/Twist| C
+    C -->|/robot/safe_cmd_vel<br/>geometry_msgs/msg/Twist| R[safe velocity command]
+    C -->|/robot/safety_status<br/>std_msgs/msg/String| U[status / alert]

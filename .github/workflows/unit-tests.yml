@@ -1,0 +1,16 @@
+name: Python unit tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  safety-logic:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run safety logic tests
+        run: python -m unittest discover -s test -v
